@@ -1,8 +1,17 @@
-"use client";
+'use client'
 
-import { User } from "lucia";
-import { useEffect } from "react";
+import { Button } from "@mui/material";
+import Background from "@/components/Background";
+
 
 export default function Home() {
-  return;
+  return(
+    <>
+      <div style={{color:'white'}}>
+        Putting stuff on top!
+      </div>
+
+      <Background />
+    </>
+  );
 }
