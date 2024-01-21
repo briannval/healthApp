@@ -22,7 +22,7 @@ function Copyright() {
         <Typography variant="body2" color="text.secondary" align="center">
             {"Copyright © "}
             <Link color="inherit" href="https://mui.com/">
-                Your Website
+                Alleviate
             </Link>{" "}
             {new Date().getFullYear()}
             {"."}
@@ -94,20 +94,20 @@ export default function Album() {
                                 }}
                             >
                                 <CardMedia
-                                    component="div"
+                                    component="img"
                                     sx={{
                                         // 16:9
                                         pt: "56.25%",
                                     }}
-                                    image={require("./images/yoga.jpg")}
+                                    image={require("./images/doctor.jpg")}
                                 />
                                 <CardContent sx={{ flexGrow: 1 }}>
                                     <Typography gutterBottom variant="h5" component="h2">
                                         Accurate Diagnosis
                                     </Typography>
                                     <Typography>
-                                        State-of-the-art AI algorithms guarantee precise feedback
-                                        based on user descriptions.
+                                        State-of-the-art AI algorithms guarantee precise analysis
+                                        based on user descriptions of symptoms.
                                     </Typography>
                                 </CardContent>
                             </Card>
@@ -123,7 +123,7 @@ export default function Album() {
                                 }}
                             >
                                 <CardMedia
-                                    component="div"
+                                    component="img"
                                     sx={{
                                         // 16:9
                                         pt: "56.25%",
@@ -132,11 +132,11 @@ export default function Album() {
                                 />
                                 <CardContent sx={{ flexGrow: 1 }}>
                                     <Typography gutterBottom variant="h5" component="h2">
-                                        Heading
+                                        Reliable Feedback
                                     </Typography>
                                     <Typography>
-                                        This is a media card. You can use this section to describe
-                                        the content.
+                                        Suggestions of subsequent steps for symptom alleviation, be
+                                        it simple exercises or seek medical help.
                                     </Typography>
                                 </CardContent>
                             </Card>
@@ -152,20 +152,20 @@ export default function Album() {
                                 }}
                             >
                                 <CardMedia
-                                    component="div"
+                                    component="img"
                                     sx={{
                                         // 16:9
                                         pt: "56.25%",
                                     }}
-                                    image={require("./images/yoga.jpg")}
+                                    image={require("./images/community.jpg")}
                                 />
                                 <CardContent sx={{ flexGrow: 1 }}>
                                     <Typography gutterBottom variant="h5" component="h2">
-                                        Heading
+                                        Global Community
                                     </Typography>
                                     <Typography>
-                                        This is a media card. You can use this section to describe
-                                        the content.
+                                        With thousands of users abroad, users can connect with those
+                                        experiencing similar symptoms.
                                     </Typography>
                                 </CardContent>
                             </Card>
@@ -176,7 +176,7 @@ export default function Album() {
             {/* Footer */}
             <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
                 <Typography variant="h6" align="center" gutterBottom>
-                    Footer
+                    Alleviate
                 </Typography>
                 <Typography variant="subtitle1" align="center" color="text.secondary" component="p">
                     Something here to give the footer a purpose!
