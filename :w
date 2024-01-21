@@ -4,6 +4,7 @@ import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import { Slider } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -11,32 +12,22 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AuthNavbar from "@/components/AuthNavbar";
 import AccessibilityIcon from "@mui/icons-material/Accessibility";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-
-const schema = z.object({
-  feeling: z
-    .string()
-    .refine((data) => parseInt(data) >= 1 && parseInt(data) <= 5, {
-      message: "Input must be between 1 to 5",
-    }),
-  sleep: z.string(),
-  description: z.string(),
-  exercise: z.string(),
-});
-
-type Form = z.infer<typeof schema>;
 
 const defaultTheme = createTheme();
 
-export default function Create() {
-  const { handleSubmit, register } = useForm<Form>({
-    resolver: zodResolver(schema),
+export default function SignInSide() {
+  const theme = createTheme({
+    typography: {
+      htmlFontSize: 20,
+    },
   });
-
-  const onSubmit = (data: Form) => {
-    console.log(data);
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log({
+      email: data.get("email"),
+      password: data.get("password"),
+    });
   };
 
   return (
@@ -88,40 +79,41 @@ export default function Create() {
               <Box
                 component="form"
                 noValidate
-                onSubmit={handleSubmit(onSubmit)}
+                onSubmit={handleSubmit}
                 sx={{ mt: 1 }}
               >
-                <TextField
-                  margin="normal"
-                  fullWidth
-                  label="How good are you today? (1-5)"
-                  id="feeling"
-                  type="number"
-                  {...register("feeling")}
+                <ThemeProvider theme={theme}>
+                  <Typography component="p" variant="h6" sx={{ marginTop: 3 }}>
+                    How are you feeling on a scale of 1 to 5?
+                  </Typography>
+                </ThemeProvider>
+                <Slider
+                  aria-label="Small steps"
+                  defaultValue={0.00000005}
+                  step={1}
+                  marks
+                  min={1}
+                  max={5}
+                  valueLabelDisplay="auto"
+                  sx={{ marginBottom: 1 }}
                 />
                 <TextField
                   margin="normal"
+                  required
                   fullWidth
-                  label="How many hours did you sleep?"
-                  id="sleep"
-                  type="number"
-                  {...register("sleep")}
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  autoFocus
                 />
                 <TextField
                   margin="normal"
                   fullWidth
                   label="Tell us how you're feeling"
-                  id="description"
+                  id="password"
+                  autoComplete="current-password"
                   multiline
-                  rows={4}
-                  {...register("description")}
-                />
-                <TextField
-                  margin="normal"
-                  fullWidth
-                  label="Did you exercise today?"
-                  id="exercise"
-                  {...register("exercise")}
                 />
                 <Button
                   type="submit"
