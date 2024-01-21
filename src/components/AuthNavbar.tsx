@@ -8,10 +8,9 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import AdbIcon from "@mui/icons-material/Adb";
+import axios from "axios";
 
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
-
-function Navbar() {
+function AuthNavbar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -34,6 +33,15 @@ function Navbar() {
     setAnchorElUser(null);
   };
 
+  const handleLogout = async () => {
+    try {
+      await axios.post("http://localhost:3000/api/auth/logout");
+      window.location.href = "/";
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <AppBar
       position="static"
@@ -45,7 +53,7 @@ function Navbar() {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="/view"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -89,16 +97,13 @@ function Navbar() {
                 display: "block",
               }}
             >
-              About Us
+              Create
             </Button>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Button sx={{ m: 1 }} variant="contained" href="/auth/login">
-              Login
-            </Button>
-            <Button sx={{ m: 1 }} variant="contained" href="/auth/signup">
-              Sign up
+            <Button sx={{ m: 1 }} variant="contained" onClick={handleLogout}>
+              Logout
             </Button>
           </Box>
         </Toolbar>
@@ -106,4 +111,4 @@ function Navbar() {
     </AppBar>
   );
 }
-export default Navbar;
+export default AuthNavbar;

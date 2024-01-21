@@ -4,11 +4,12 @@ import { Button } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { playfair } from "./ui/fonts";
 import Background from "@/components/Background";
-import CssBaseline from "@mui/material";
+import Navbar from "@/components/Navbar";
 
 function Landing() {
   return (
     <>
+      <Navbar />
       <div className="container">
         <div>
           <p className="bigtext">
