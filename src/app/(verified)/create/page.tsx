@@ -22,8 +22,10 @@ const schema = z.object({
     .refine((data) => parseInt(data) >= 1 && parseInt(data) <= 5, {
       message: "Input must be between 1 to 5",
     }),
-  sleep: z.string(),
-  description: z.string(),
+  sleep: z.string().refine((data) => parseInt(data) >= 0, {
+    message: "How can you sleep less than 0 hours?",
+  }),
+  description: z.string().min(1, { message: "Description cannot be empty" }),
   exercise: z.string(),
 });
 
@@ -32,7 +34,11 @@ type Form = z.infer<typeof schema>;
 const defaultTheme = createTheme();
 
 export default function Create() {
-  const { handleSubmit, register } = useForm<Form>({
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<Form>({
     resolver: zodResolver(schema),
   });
 
@@ -110,6 +116,14 @@ export default function Create() {
                   type="number"
                   {...register("feeling")}
                 />
+                {errors.feeling && (
+                  <Typography
+                    variant="body1"
+                    style={{ fontSize: 12, color: "red" }}
+                  >
+                    {errors.feeling.message}
+                  </Typography>
+                )}
                 <TextField
                   margin="normal"
                   fullWidth
@@ -118,6 +132,14 @@ export default function Create() {
                   type="number"
                   {...register("sleep")}
                 />
+                {errors.sleep && (
+                  <Typography
+                    variant="body1"
+                    style={{ fontSize: 12, color: "red" }}
+                  >
+                    {errors.sleep.message}
+                  </Typography>
+                )}
                 <TextField
                   margin="normal"
                   fullWidth
@@ -127,6 +149,14 @@ export default function Create() {
                   rows={4}
                   {...register("description")}
                 />
+                {errors.description && (
+                  <Typography
+                    variant="body1"
+                    style={{ fontSize: 12, color: "red" }}
+                  >
+                    {errors.description.message}
+                  </Typography>
+                )}
                 <TextField
                   margin="normal"
                   fullWidth
@@ -134,6 +164,14 @@ export default function Create() {
                   id="exercise"
                   {...register("exercise")}
                 />
+                {errors.exercise && (
+                  <Typography
+                    variant="body1"
+                    style={{ fontSize: 12, color: "red" }}
+                  >
+                    {errors.exercise.message}
+                  </Typography>
+                )}
                 <Button
                   type="submit"
                   fullWidth
