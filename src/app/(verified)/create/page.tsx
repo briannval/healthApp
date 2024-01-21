@@ -20,6 +20,7 @@ import AccessibilityIcon from "@mui/icons-material/Accessibility";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 
 import { useState } from "react";
 import gptUtil from "./gptUtil.ts"
@@ -31,8 +32,10 @@ const schema = z.object({
     .refine((data) => parseInt(data) >= 1 && parseInt(data) <= 5, {
       message: "Input must be between 1 to 5",
     }),
-  sleep: z.string(),
-  description: z.string(),
+  sleep: z.string().refine((data) => parseInt(data) >= 0, {
+    message: "How can you sleep less than 0 hours?",
+  }),
+  description: z.string().min(1, { message: "Description cannot be empty" }),
   exercise: z.string(),
 });
 
@@ -41,22 +44,40 @@ type Form = z.infer<typeof schema>;
 const defaultTheme = createTheme();
 
 export default function Create() {
-  const { handleSubmit, register } = useForm<Form>({
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<Form>({
     resolver: zodResolver(schema),
   });
 
   const [disableSubmit, setDisableSubmit] = useState(false);
+    
+  const onSubmit = async ({ feeling, sleep, description, exercise }: Form) => {
+    try {
 
-  async function onSubmit(data: Form){
-    console.log(data);
-    setDisableSubmit(true);
-    await gptUtil( promptUtil(data.sleep, data.exercise, data.feeling, data.description) );
-    setDisableSubmit(false);
+      setDisableSubmit(true);
+
+      await gptUtil( promptUtil(sleep, exercise, feeling, description) );
+
+      const res = await axios.post("http://localhost:3000/api/logs/create", {
+        feeling,
+        sleep,
+        description,
+        exercise,
+      });
+      console.log(res);
+
+      setDisableSubmit(false);
+
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
     <>
-      <p id="gpt-response"> (stuff goes here) </p>
       <AuthNavbar />
       <ThemeProvider theme={defaultTheme}>
         <Grid container component="main" sx={{ height: "100vh" }}>
@@ -115,6 +136,14 @@ export default function Create() {
                   type="number"
                   {...register("feeling")}
                 />
+                {errors.feeling && (
+                  <Typography
+                    variant="body1"
+                    style={{ fontSize: 12, color: "red" }}
+                  >
+                    {errors.feeling.message}
+                  </Typography>
+                )}
                 <TextField
                   margin="normal"
                   fullWidth
@@ -123,6 +152,14 @@ export default function Create() {
                   type="number"
                   {...register("sleep")}
                 />
+                {errors.sleep && (
+                  <Typography
+                    variant="body1"
+                    style={{ fontSize: 12, color: "red" }}
+                  >
+                    {errors.sleep.message}
+                  </Typography>
+                )}
                 <TextField
                   margin="normal"
                   fullWidth
@@ -132,6 +169,14 @@ export default function Create() {
                   rows={4}
                   {...register("description")}
                 />
+                {errors.description && (
+                  <Typography
+                    variant="body1"
+                    style={{ fontSize: 12, color: "red" }}
+                  >
+                    {errors.description.message}
+                  </Typography>
+                )}
                 <TextField
                   margin="normal"
                   fullWidth
@@ -139,6 +184,14 @@ export default function Create() {
                   id="exercise"
                   {...register("exercise")}
                 />
+                {errors.exercise && (
+                  <Typography
+                    variant="body1"
+                    style={{ fontSize: 12, color: "red" }}
+                  >
+                    {errors.exercise.message}
+                  </Typography>
+                )}
                 <Button
                   disabled = {disableSubmit}
                   type="submit"
@@ -148,6 +201,13 @@ export default function Create() {
                 >
                   Submit
                 </Button>
+
+                <Typography
+                  variant="body1"
+                  id="gpt-response"
+                >
+                  "Typography test"
+                </Typography>
               </Box>
             </Box>
           </Grid>

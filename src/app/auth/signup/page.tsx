@@ -35,7 +35,11 @@ const schema = z
 type Form = z.infer<typeof schema>;
 
 export default function SignUp() {
-  const { handleSubmit, register } = useForm<Form>({
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<Form>({
     resolver: zodResolver(schema),
   });
 
@@ -113,6 +117,14 @@ export default function SignUp() {
                   autoComplete="email"
                   {...register("email_address")}
                 />
+                {errors.email_address && (
+                  <Typography
+                    variant="body1"
+                    style={{ fontSize: 12, color: "red" }}
+                  >
+                    {errors.email_address.message}
+                  </Typography>
+                )}
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -124,6 +136,14 @@ export default function SignUp() {
                   autoComplete="new-password"
                   {...register("password")}
                 />
+                {errors.password && (
+                  <Typography
+                    variant="body1"
+                    style={{ fontSize: 12, color: "red" }}
+                  >
+                    {errors.password.message}
+                  </Typography>
+                )}
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -135,6 +155,14 @@ export default function SignUp() {
                   autoComplete="new-password"
                   {...register("confirm_password")}
                 />
+                {errors.confirm_password && (
+                  <Typography
+                    variant="body1"
+                    style={{ fontSize: 12, color: "red" }}
+                  >
+                    {errors.confirm_password.message}
+                  </Typography>
+                )}
               </Grid>
             </Grid>
             <Button

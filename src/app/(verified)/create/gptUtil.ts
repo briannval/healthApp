@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 
-const openai = new OpenAI({"apiKey": "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", dangerouslyAllowBrowser: true});
+const openai = new OpenAI({"apiKey": "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", dangerouslyAllowBrowser: true});
 
 export default async function runGPT(msg) {
   const completion = await openai.chat.completions.create({

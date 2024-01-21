@@ -5,7 +5,6 @@ import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
@@ -23,13 +22,12 @@ export default function Album() {
       <Navbar />
       <ThemeProvider theme={defaultTheme}>
         <main>
-          {/* Hero unit */}
           <Box
             sx={{
               bgcolor: "background.paper",
               pt: 8,
-              pb: 6,
-              height: "35vh",
+              pb: 2,
+              height: "25vh",
             }}
           >
             <Container maxWidth="sm">
@@ -58,12 +56,10 @@ export default function Album() {
                 justifyContent="center"
               >
                 <Button variant="contained">Get Started</Button>
-                <Button variant="outlined">Frequently Asked Questions</Button>
               </Stack>
             </Container>
           </Box>
           <Container sx={{ py: 8 }} maxWidth="md">
-            {/* End hero unit */}
             <Typography
               component="h3"
               variant="h4"
@@ -92,6 +88,7 @@ export default function Album() {
                       // 16:9
                       pt: "56.25%",
                     }}
+                    image="https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2022/02/lymphocytic_leukemia_GettyImages828073656_Header-1024x575.jpg?w=1155&h=1528"
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
@@ -120,14 +117,15 @@ export default function Album() {
                       // 16:9
                       pt: "56.25%",
                     }}
+                    image="https://static.vecteezy.com/system/resources/previews/024/084/492/large_2x/black-and-white-image-of-human-hands-typing-on-laptop-keyboard-at-desk-in-office-or-home-generative-ai-technology-photo.jpg"
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      Heading
+                      Daily Logs
                     </Typography>
                     <Typography>
-                      This is a media card. You can use this section to describe
-                      the content.
+                      Encourages user's consistency in logging health conditions
+                      daily for health monitoring
                     </Typography>
                   </CardContent>
                 </Card>
@@ -148,14 +146,15 @@ export default function Album() {
                       // 16:9
                       pt: "56.25%",
                     }}
+                    image="https://d39l2hkdp2esp1.cloudfront.net/img/photo/197125/197125_00_2x.jpg?20191229000546"
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      Heading
+                      Tracking System
                     </Typography>
                     <Typography>
-                      This is a media card. You can use this section to describe
-                      the content.
+                      Users are able to view their logs and review their health
+                      conditions
                     </Typography>
                   </CardContent>
                 </Card>
