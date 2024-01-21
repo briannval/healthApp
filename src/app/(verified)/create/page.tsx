@@ -14,6 +14,7 @@ import AccessibilityIcon from "@mui/icons-material/Accessibility";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 
 const schema = z.object({
   feeling: z
@@ -35,8 +36,18 @@ export default function Create() {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = (data: Form) => {
-    console.log(data);
+  const onSubmit = async ({ feeling, sleep, description, exercise }: Form) => {
+    try {
+      const res = await axios.post("http://localhost:3000/api/logs/create", {
+        feeling,
+        sleep,
+        description,
+        exercise,
+      });
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -129,7 +140,7 @@ export default function Create() {
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  Sign In
+                  Submit
                 </Button>
               </Box>
             </Box>
