@@ -1,5 +1,11 @@
 "use client";
 
+// KIAN'S EDITS (to keep track)
+// added useState to disable Submit button while chat-gpt is being called
+// edited onSubmit function to make call to chat-gpt
+// added temporary <p> </p> at top as placeholder for chat-gpt output
+// added disabled={disableSubmit} field to submit button
+
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -14,6 +20,10 @@ import AccessibilityIcon from "@mui/icons-material/Accessibility";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import { useState } from "react";
+import gptUtil from "./gptUtil.ts"
+import promptUtil from './promptUtil.ts'
 
 const schema = z.object({
   feeling: z
@@ -35,12 +45,18 @@ export default function Create() {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = (data: Form) => {
+  const [disableSubmit, setDisableSubmit] = useState(false);
+
+  async function onSubmit(data: Form){
     console.log(data);
+    setDisableSubmit(true);
+    await gptUtil( promptUtil(data.sleep, data.exercise, data.feeling, data.description) );
+    setDisableSubmit(false);
   };
 
   return (
     <>
+      <p id="gpt-response"> (stuff goes here) </p>
       <AuthNavbar />
       <ThemeProvider theme={defaultTheme}>
         <Grid container component="main" sx={{ height: "100vh" }}>
@@ -124,12 +140,13 @@ export default function Create() {
                   {...register("exercise")}
                 />
                 <Button
+                  disabled = {disableSubmit}
                   type="submit"
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  Sign In
+                  Submit
                 </Button>
               </Box>
             </Box>

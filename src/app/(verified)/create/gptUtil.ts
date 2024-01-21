@@ -1,8 +1,8 @@
 import OpenAI from "openai";
 
-const openai = new OpenAI({"apiKey": "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");
+const openai = new OpenAI({"apiKey": "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", dangerouslyAllowBrowser: true});
 
-async function runGPT( msg ) {
+export default async function runGPT(msg) {
   const completion = await openai.chat.completions.create({
     messages: [{ role: "system", content: "You are a personal trainer. You give advice to your client in 50 words or less." },
                { role: "user",   content: msg }],
