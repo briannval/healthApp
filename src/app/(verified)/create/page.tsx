@@ -23,8 +23,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 
 import { useState } from "react";
-import gptUtil from "./gptUtil.ts"
-import promptUtil from './promptUtil.ts'
+import gptUtil from "./gptUtil";
+import promptUtil from "./promptUtil";
 
 const schema = z.object({
   feeling: z
@@ -53,13 +53,12 @@ export default function Create() {
   });
 
   const [disableSubmit, setDisableSubmit] = useState(false);
-    
+
   const onSubmit = async ({ feeling, sleep, description, exercise }: Form) => {
     try {
-
       setDisableSubmit(true);
 
-      await gptUtil( promptUtil(sleep, exercise, feeling, description) );
+      await gptUtil(promptUtil(sleep, exercise, feeling, description));
 
       const res = await axios.post("http://localhost:3000/api/logs/create", {
         feeling,
@@ -70,7 +69,6 @@ export default function Create() {
       console.log(res);
 
       setDisableSubmit(false);
-
     } catch (e) {
       console.log(e);
     }
@@ -193,7 +191,7 @@ export default function Create() {
                   </Typography>
                 )}
                 <Button
-                  disabled = {disableSubmit}
+                  disabled={disableSubmit}
                   type="submit"
                   fullWidth
                   variant="contained"
@@ -202,10 +200,7 @@ export default function Create() {
                   Submit
                 </Button>
 
-                <Typography
-                  variant="body1"
-                  id="gpt-response"
-                >
+                <Typography variant="body1" id="gpt-response">
                   "Typography test"
                 </Typography>
               </Box>
