@@ -23,8 +23,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 
 import { useState } from "react";
-import gptUtil from "./gptUtil.ts"
-import promptUtil from './promptUtil.ts'
+import gptUtil from "@/utils/gptUtil.ts"
+import promptUtil from '@/utils/promptUtil.ts'
 
 const schema = z.object({
   feeling: z
@@ -206,7 +206,7 @@ export default function Create() {
                   variant="body1"
                   id="gpt-response"
                 >
-                  "Typography test"
+                  
                 </Typography>
               </Box>
             </Box>

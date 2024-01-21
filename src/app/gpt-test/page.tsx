@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 
-import gptUtil from "./gptUtil.ts"
-import promptUtil from './promptUtil.ts'
+import gptUtil from "@/utils/gptUtil.ts"
+import promptUtil from '@/utils/promptUtil.ts'
 
 import Button from "@mui/material/Button";
 
