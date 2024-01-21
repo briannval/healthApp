@@ -64,7 +64,9 @@ export default function Album() {
                             way of diagnosis.
                         </Typography>
                         <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center">
-                            <Button variant="contained">Get Started</Button>
+                            <Button variant="contained" href="/auth/signup">
+                                Get Started
+                            </Button>
                             <Button variant="outlined">Frequently Asked Questions</Button>
                         </Stack>
                     </Container>
