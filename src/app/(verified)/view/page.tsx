@@ -1,7 +1,7 @@
 "use client";
 import AuthNavbar from "@/components/AuthNavbar";
 import OutlinedCard from "@/components/Card";
-import { Container, Typography } from "@mui/material";
+import { CircularProgress, Container, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
 import { useEffect, useReducer, useState } from "react";
@@ -83,6 +83,11 @@ const View = () => {
               </Grid>
             ))}
         </Grid>
+        {state.loading && (
+          <CircularProgress
+            sx={{ marginLeft: 50, marginTop: 20, width: 50, height: 50 }}
+          />
+        )}
       </Container>
     </>
   );

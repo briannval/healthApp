@@ -5,8 +5,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { FormControlLabel, Rating } from "@mui/material";
-import Checkbox from "@mui/material/Checkbox";
+import { Rating } from "@mui/material";
 
 export interface Log {
   _id: string;
