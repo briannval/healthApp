@@ -5,44 +5,50 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { FormControlLabel, Rating } from "@mui/material";
+import Checkbox from "@mui/material/Checkbox";
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
-  >
-    •
-  </Box>
-);
+export interface Log {
+  _id: string;
+  date: string;
+  feeling: string;
+  sleep: string;
+  description: string;
+  exercise: string;
+  userId: string;
+}
 
-const card = (
-  <React.Fragment>
-    <CardContent>
-      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-        Word of the Day
-      </Typography>
-      <Typography variant="h5" component="div">
-        be{bull}nev{bull}o{bull}lent
-      </Typography>
-      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        adjective
-      </Typography>
-      <Typography variant="body2">
-        well meaning and kindly.
-        <br />
-        {'"a benevolent smile"'}
-      </Typography>
-    </CardContent>
-    <CardActions>
-      <Button size="small">Learn More</Button>
-    </CardActions>
-  </React.Fragment>
-);
-
-export default function OutlinedCard() {
+export default function OutlinedCard(props: Log) {
   return (
-    <Box sx={{ minWidth: 275 }}>
-      <Card variant="outlined">{card}</Card>
+    <Box sx={{ minWidth: 275, minHeight: 200 }}>
+      <Card variant="outlined">
+        <React.Fragment>
+          <CardContent>
+            <Typography
+              sx={{ fontSize: 14 }}
+              color="text.secondary"
+              gutterBottom
+            >
+              {props.date}
+            </Typography>
+            <Typography variant="h5" component="div"></Typography>
+            <Rating name="read-only" value={parseInt(props.feeling)} readOnly />
+            <Typography variant="body2" sx={{ height: 90 }}>
+              Description:
+              <br />
+              {props.description}
+            </Typography>
+            <Typography variant="body2" sx={{ height: 30 }}>
+              Exercise:
+              <br />
+              {props.exercise}
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button size="small">Delete</Button>
+          </CardActions>
+        </React.Fragment>
+      </Card>
     </Box>
   );
 }

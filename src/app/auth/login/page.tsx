@@ -31,6 +31,7 @@ export default function Login() {
   });
 
   const onSubmit = async ({ email_address, password }: Form) => {
+    console.log(email_address, password);
     try {
       await axios.post("http://localhost:3000/api/auth/login", {
         email_address,
