@@ -88,7 +88,7 @@ function AuthNavbar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Button
-              href="/about"
+              href="/create"
               onClick={handleCloseNavMenu}
               sx={{
                 mx: 5,
@@ -97,7 +97,31 @@ function AuthNavbar() {
                 display: "block",
               }}
             >
-              Create
+              Log
+            </Button>
+            <Button
+              href="/view"
+              onClick={handleCloseNavMenu}
+              sx={{
+                mx: 5,
+                fontFamily: "monospace",
+                color: "white",
+                display: "block",
+              }}
+            >
+              View
+            </Button>
+            <Button
+              href="/view"
+              onClick={handleCloseNavMenu}
+              sx={{
+                mx: 5,
+                fontFamily: "monospace",
+                color: "white",
+                display: "block",
+              }}
+            >
+              Overall
             </Button>
           </Box>
 
