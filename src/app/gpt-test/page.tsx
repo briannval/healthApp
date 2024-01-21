@@ -3,48 +3,53 @@
 import { useState, useEffect } from "react";
 import OpenAI from "openai";
 
+//TODO: MOVE THIS VALUE TO ENV
 const openai = new OpenAI({"apiKey": "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", dangerouslyAllowBrowser: true});
 
-async function main() {
+async function main( msg ) {
   const completion = await openai.chat.completions.create({
     messages: [{ role: "system", content: "You are a personal trainer. You give advice to your client in 50 words or less." },
-               { role: "user", content: "In the last week, I have slept [3, 4, 12, 7, 1, 3, 8] hours. I have eaten two meals a day every day. I have excercied five times. I have walked an average of 4000 steps per day."}],
+               { role: "user",   content: msg }],
     model: "gpt-3.5-turbo",
   });
 
   document.getElementById("gpt-response").innerHTML = (completion.choices[0].message.content);
 }
 
-const Trigger = () => {
-   const [disabled,setDisabled] = useState(false);
-
-   const call_api = async () => {
-       setDisabled(true);
-       console.log("Disabling button.");
-       await main();
-       setDisabled(false);
-       console.log("Re-enabling button.");
-   }
-
-   return <button disabled={disabled} onClick={call_api}/>
- 
+function generatePrompt(sleep, exercise, score, extra){
+  let prompt = "Here is a report of my health habits for today: ";
+  prompt += "I slept for " + sleep + " hours, and I did";
+  if( !exercise ){ prompt += " not";}
+  prompt += " exercise today." + " On a scale of 1-5, with 5 being the best, today I would give myself a rating of: ";
+  prompt += score;
+  prompt += ". Other information about my wellness today includes: ";
+  prompt += extra;
+  return prompt;
 }
 
-export default function Counter() {
-  const [count, setCount] = useState(0);
-  const [calculation, setCalculation] = useState(0);
+const Trigger = (props) => {
+  const [disabled,setDisabled] = useState(false);
 
-  // useEffect(() => {
-  //   main();
-  // }, [count]);
-  //<button onClick={() => setCount((c) => c + 1)}>+</button>
-  //<p>Calculation: {calculation}</p>
+  const call_api = async () => {
+      setDisabled(true);
+      await main( generatePrompt( 1, true, 3, "I had a fever and headache and couldn't sleep well") );
+      setDisabled(false);
+  }
 
   return (
     <>
-      <p>Count: {count}</p>
-      <p id ="gpt-response"> Stuff goes here </p>
-      <Trigger />
+      <button disabled={disabled} onClick={call_api}>
+        {props.children}
+      </button>
+    </>
+  );
+}
+
+export default function GPT() {
+  return (
+    <>
+      <p id ="gpt-response"> (response goes here) </p>
+      <Trigger> Press Me! </Trigger>
     </>
   );
 }
