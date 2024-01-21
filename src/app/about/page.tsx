@@ -1,3 +1,8 @@
+"use client";
+
+import * as React from "react";
+import Album from "./Album";
+
 export default function About() {
-  return <h1>About page</h1>;
+    return <Album />;
 }
