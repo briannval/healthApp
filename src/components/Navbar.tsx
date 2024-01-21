@@ -19,6 +19,17 @@ import Paper from "@mui/material/Paper";
 import { BorderAllRounded, Height } from "@mui/icons-material";
 import Image from "next/image";
 
+const theme = createTheme({
+    palette: {
+        background: {
+            default: "#F7F9FC",
+        },
+        primary: {
+            main: "#ff0000",
+        },
+    },
+});
+
 const pages = [
     {
         title: "Home",
@@ -112,11 +123,7 @@ function Navbar() {
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
-                        <Button
-                            sx={{ m: 1, color: "#40513B", bgcolor: "#EDF1D6" }}
-                            variant="contained"
-                            href="/auth/login"
-                        >
+                        <Button sx={{ m: 1 }} variant="contained" href="/auth/login">
                             Login
                         </Button>
                         <Button
