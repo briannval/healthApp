@@ -9,6 +9,7 @@ export default function Background() {
       <div className="backgroundImage">
         <div style={{ display: 'flex', flexDirection: 'column'}}>
           <Image
+            alt='person typing on laptop; sthetoscope visible'
             src='/photos/bg.jpg'
             fill
             sizes="100vw"
