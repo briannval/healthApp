@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import Album from "./Album";
+import Album from "@/components/Album";
 
 export default function About() {
-    return <Album />;
+  return <Album />;
 }
