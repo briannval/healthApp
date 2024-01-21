@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Button } from "@mui/material";
@@ -53,6 +54,7 @@ function Landing(){
     </>
   );
 }
+
 export default function Home() {
   return(
     <>
